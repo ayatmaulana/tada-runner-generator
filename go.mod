@@ -7,6 +7,7 @@ require (
 	github.com/gobuffalo/packr v1.30.1
 	github.com/iancoleman/strcase v0.1.0
 	github.com/manifoldco/promptui v0.7.0
+	github.com/spf13/cobra v1.0.0
 	github.com/valyala/fasttemplate v1.2.1
 	github.com/valyala/quicktemplate v1.6.2 // indirect
 )

@@ -10,13 +10,56 @@ import (
 	"github.com/ayatmaulana/tada-runner-generator/prompts"
 	struts "github.com/ayatmaulana/tada-runner-generator/structs"
 	"github.com/iancoleman/strcase"
+	"github.com/spf13/cobra"
 
 	"github.com/gobuffalo/packr"
 )
 
+var (
+	box        packr.Box
+	currentDir string
+
+	installDep bool
+	copyDir    bool
+)
+
 func main() {
-	box := packr.NewBox("./template/runner")
-	currentDir, _ := os.Getwd()
+
+	var cmdAdd = &cobra.Command{
+		Use:              "add [runner name]",
+		Short:            "Add new runner",
+		Long:             "",
+		Args:             cobra.MinimumNArgs(1),
+		TraverseChildren: true,
+		Run: func(cmd *cobra.Command, args []string) {
+			if args[0] == "" {
+				fmt.Println("Invalid Arguments")
+				os.Exit(-1)
+			}
+			exec(args[0])
+		},
+	}
+	cmdAdd.PersistentFlags().BoolVarP(&installDep, "install-dep", "i", true, "Install Depedencies")
+	cmdAdd.PersistentFlags().BoolVarP(&copyDir, "copy-folder", "c", true, "Copy app/config/lib/locales folder ?")
+
+	var cmdInteractiveMode = &cobra.Command{
+		Use:   "interactive",
+		Short: "Enter to interactive mode",
+		Long:  "",
+		Run: func(cmd *cobra.Command, args []string) {
+			interactiveMode()
+		},
+	}
+
+	var rootCmd = &cobra.Command{Use: "tada-runner-generator"}
+	rootCmd.AddCommand(cmdAdd)
+	rootCmd.AddCommand(cmdInteractiveMode)
+	rootCmd.Execute()
+}
+
+func init() {
+	box = packr.NewBox("./template/runner")
+	currentDir, _ = os.Getwd()
 	jsonFile, err := os.Open(currentDir + "/package.json")
 
 	// if we os.Open returns an error then handle it
@@ -32,25 +75,24 @@ func main() {
 
 	if result["name"] != "runners" {
 		fmt.Println("Please run in your runner directory")
-		return
+		os.Exit(-1)
 	}
+}
 
+func interactiveMode() {
 	name := prompts.NamePrompt()
-	copyDir := prompts.CopyFolderPrompt()
-	installDep := prompts.InstallDepPrompt()
+	copyDir = prompts.CopyFolderPrompt()
+	installDep = prompts.InstallDepPrompt()
 
-	fmt.Println(copyDir)
-	fmt.Println(installDep)
+	exec(name)
+}
 
-	// fmt.Println(name)
-	// fmt.Println(copyDir)
-	// fmt.Println(installDep)
-
+func exec(name string) {
 	TopicName := strcase.ToCamel(name)
 	folderName := strcase.ToKebab(name)
 	titleName := strcase.ToScreamingDelimited(name, '.', ' ', true)
 
-	runnerGenerator := &struts.RunnerGenerator{
+	data := &struts.RunnerGenerator{
 		TopicName:  TopicName,
 		FolderName: folderName,
 		TitleName:  titleName,
@@ -61,10 +103,5 @@ func main() {
 		PackrBox:   box,
 	}
 
-	lib.NewCreateRunner(runnerGenerator)
-
-	// fmt.Println(channelName)
-	// fmt.Println(folderName)
-	// fmt.Println(titleName)
-
+	lib.NewCreateRunner(data)
 }
