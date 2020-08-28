@@ -1,0 +1,70 @@
+#=================={{FolderName}}=======================
+
+'build {{FolderName}} (staging)':
+  stage: build
+  image: rbudiharso/docker-awscli-kubectl:latest
+  environment:
+    name: staging
+  variables:
+    NODE_ENV: staging
+    RUNNER: {{FolderName}}
+  extends: .build_steps
+  only:
+    refs:
+      - develop
+    changes:
+      - services/{{FolderName}}/**/*
+  tags:
+    - group_runner-runner
+'build {{FolderName}} (production)':
+  stage: build
+  image: rbudiharso/docker-awscli-kubectl:latest
+  environment:
+    name: production
+  variables:
+    NODE_ENV: production
+    RUNNER: {{FolderName}}
+  extends: .build_steps
+  only:
+    refs:
+      - master
+    changes:
+      - services/{{FolderName}}/**/*
+  tags:
+    - group_runner-runner
+'deploy {{FolderName}} (staging)':
+  stage: deploy
+  image: rbudiharso/docker-awscli-kubectl:latest
+  environment:
+    name: staging
+  variables:
+    NODE_ENV: staging
+    RUNNER: {{FolderName}}
+    CLUSTER: k-dev.gift.id
+    KUBECONTEXT: tada-deployer-kube-system-k-dev.gift.id
+  extends: .deploy_steps
+  only:
+    refs:
+      - develop
+    changes:
+      - services/{{FolderName}}/**/*
+  tags:
+    - group_runner-runner
+'deploy {{FolderName}} (production)':
+  stage: deploy
+  image: rbudiharso/docker-awscli-kubectl:latest
+  environment:
+    name: production
+  variables:
+    NODE_ENV: production
+    RUNNER: {{FolderName}}
+    CLUSTER: prod.gift.id
+    KUBECONTEXT: tada-deployer-kube-system-prod.gift.id
+  extends: .deploy_steps
+  only:
+    refs:
+      - master
+    changes:
+      - services/{{FolderName}}/**/*
+  tags:
+    - group_runner-runner

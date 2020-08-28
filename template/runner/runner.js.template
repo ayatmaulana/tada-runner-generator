@@ -1,0 +1,34 @@
+const PublishStatus = require(__base + 'lib/runner_helpers/publish_status');
+
+async function runner(NSQ, redis, message) {
+  const { _id, data, job } = message;
+
+  const JobFn = PublishStatus({
+    NSQ,
+    Redis: redis,
+    message
+  });
+
+  try {
+    if (!job) throw new Error(`No Job for this Queue #${_id}`);
+    if (job && !job.data) throw new Error(`Job #${job._id} has no data`);
+    if (!data) throw new Error(`Queue #${_id} has no data`);
+
+    await JobFn.pendingQueue();
+
+    /**
+     * Your Business Logic Here.
+     */
+
+    const messageResult = `[{{TitleName}}]: Completed`;
+    console.log(messageResult);
+
+    await JobFn.doneQueue({message: messageResult});
+  } catch (error) {
+    console.log(`[{{TitleName}}]: ${error.message || error.error}`);
+
+    await JobFn.failedQueue(error.message || error.error);
+  }
+}
+
+module.exports = runner;

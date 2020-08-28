@@ -1,0 +1,21 @@
+FROM mhart/alpine-node:10.15.3 as build
+RUN apk add git make postgresql-dev openssh python g++
+WORKDIR /opt/app
+COPY ./github.key /repo/
+COPY ./github.sh /repo/
+RUN chmod 600 /repo/github.key
+ENV GIT_SSH=/repo/github.sh
+ARG NODE_ENV=production
+ENV NODE_ENV ${NODE_ENV}
+
+#Copy Lib dependencies
+COPY ./services/{{FolderName}} ./
+COPY ./deployment/$NODE_ENV.env ./$NODE_ENV.env
+COPY ./app/models ./app/models
+COPY ./lib ./lib
+COPY ./locales ./locales
+COPY ./config ./config
+RUN npm install && npm cache clean --force
+
+EXPOSE 3000
+CMD ["node", "server.js"]

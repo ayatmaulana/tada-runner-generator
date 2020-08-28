@@ -1,0 +1,62 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{FolderName}}
+spec:
+  selector:
+    matchLabels:
+      app: {{FolderName}}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{FolderName}}
+    spec:
+      containers:
+        - name: {{FolderName}}
+          image: 876683363342.dkr.ecr.ap-southeast-1.amazonaws.com/runners/{{FolderName}}:${PACKAGE_VERSION}
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: env
+              mountPath: /opt/app/${ENV_FILE}
+              subPath: ${ENV_FILE}
+          env:
+            - name: NODE_ENV
+              value: ${NODE_ENV}
+          resources:
+            requests:
+              memory: "200M"
+              cpu: "20m"
+            limits:
+              memory: "300M"
+              cpu: "45m"
+      volumes:
+        - name: env
+          secret:
+            secretName: runners-env
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{FolderName}}
+spec:
+  maxReplicas: 5
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{FolderName}}
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 80
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
