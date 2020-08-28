@@ -23,11 +23,11 @@ func NewCreateRunner(runnerGeneratorData *mystructs.RunnerGenerator) {
 	createRunner.makeDir()
 	createRunner.parsingAndCopyFromTemplate()
 
-	if createRunner.runnerGeneratorData.InstallDep == true {
+	if createRunner.runnerGeneratorData.InstallDep {
 		createRunner.runNpmInstall()
 	}
 
-	if createRunner.runnerGeneratorData.CopyDir == true {
+	if createRunner.runnerGeneratorData.CopyDir {
 		createRunner.copyDir()
 	}
 
@@ -139,5 +139,4 @@ func (this *CreateRunner) parsingAndCopyFromTemplate() {
 	if _, err := f.WriteString(gitlabCIFile); err != nil {
 		fmt.Println(err)
 	}
-	// this.writeFile("server.js", gitlabCIFile)
 }
