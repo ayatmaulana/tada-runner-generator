@@ -20,10 +20,6 @@ brew install tada-runner-generator
 
 From Golang Source
 
-**Requirements**
-- Golang 1.11 or above
-
-
 ```bash
 go get -u https://github.com/ayatmaulana/tada-runner-generator
 ```
@@ -60,7 +56,7 @@ tada-runner-generator add "birthday-notification" -i -c
 tada-runner-generator interactive
 ```
 
-### VS Code Extension
+<!-- ### VS Code Extension -->
 
 
 ## 👨🏻‍💻Contributing
@@ -70,7 +66,13 @@ Please make sure to update tests as appropriate.
 
 --
 
-Development Tutorial.
+
+
+**Requirements**
+- Golang 1.11 or above
+
+
+**Development Tutorial.**
 
 ```bash
 git clone http://github.com/ayatmaulana/tada-runner-generator
