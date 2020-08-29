@@ -20,6 +20,10 @@ brew install tada-runner-generator
 
 From Golang Source
 
+**Requirements**
+- Golang 1.11 or above
+
+
 ```bash
 go get -u https://github.com/ayatmaulana/tada-runner-generator
 ```
@@ -64,6 +68,6 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Please make sure to update tests as appropriate.
 
-## ❤️License
+## ❤️ License
 - MIT - [https://choosealicense.com/licenses/mit](https://choosealicense.com/licenses/mit/)
 - Image - [https://looneytunesshow.fandom.com/wiki/Road_Runner](https://looneytunesshow.fandom.com/wiki/Road_Runner)
