@@ -1,5 +1,8 @@
 # TADA RUNNER GENERATOR
 
+## v0.0.3
+- Fix install package NPM and copy dir 
+
 ## v0.0.2
 - Fix Packr
 
