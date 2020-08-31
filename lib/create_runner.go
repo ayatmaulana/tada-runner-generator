@@ -31,24 +31,33 @@ func NewCreateRunner(runnerGeneratorData *mystructs.RunnerGenerator) {
 		createRunner.copyDir()
 	}
 
+	fmt.Println("[+] Well Done ✅")
+
+}
+
+func RunCMD(path string, args []string) {
+	cmd := exec.Command(path, args...)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	cmd.Run()
 }
 
 func (this *CreateRunner) runNpmInstall() {
-	cmd := exec.Command("cd", this.targetFolder, "&&", "npm", "i")
-	err := cmd.Run()
-	if err != nil {
-		fmt.Println(fmt.Sprintf("cmd.Run() failed with %s\n", err))
-	}
+	fmt.Println("\n\n[+] Installing NPM package ")
+	args := []string{"i", this.targetFolder}
+	RunCMD("npm", args)
 }
 
 func (this *CreateRunner) copyDir() {
-	appDir := this.targetFolder + "../app"
-	configDir := this.targetFolder + "../config"
-	localesDir := this.targetFolder + "../locales"
-	libDir := this.targetFolder + "../lib"
+	appDir := this.targetFolder + "/../../app"
+	configDir := this.targetFolder + "/../../config"
+	localesDir := this.targetFolder + "/../../locales"
+	libDir := this.targetFolder + "/../../lib"
 
-	copyCommand := fmt.Sprintf("copy -R %s %s %s %s %s", appDir, configDir, localesDir, libDir, this.targetFolder)
-	exec.Command(copyCommand)
+	fmt.Println("\n\n[+] Copying folder app, config, lib, locales to your runner folder")
+
+	args := []string{"-R", appDir, configDir, localesDir, libDir, this.targetFolder}
+	RunCMD("cp", args)
 }
 
 func (this *CreateRunner) makeDir() {
@@ -114,7 +123,7 @@ func (this *CreateRunner) parsingAndCopyFromTemplate() {
 
 	// parse package.json
 	packageJSONFile := this.parseTemplate("package.json.template")
-	this.writeFile("package.js", packageJSONFile, false)
+	this.writeFile("package.json", packageJSONFile, false)
 
 	// parse Dockerfile
 	dockerFile := this.parseTemplate("DockerFile.template")
