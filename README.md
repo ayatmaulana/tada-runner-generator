@@ -1,28 +1,32 @@
-
-<img src="https://vignette.wikia.nocookie.net/looneytunesshow/images/1/1b/The_Road_Runner.png/revision/latest/scale-to-width-down/340?cb=20121013144306" style="width:50%" align="right" />
+<img src="https://images-na.ssl-images-amazon.com/images/I/71xBAstQ3%2BL._AC_SL1500_.jpg" align="right" width="450" height="400" />
 
 # TADA RUNNER GENERATOR
 
 Generator for TADA Runner, simplify you life and avoiding `copas` from existing runner.
 
+
 ## 🚀 Installation
 
-Using AUR for ArchLinux user
+#### Using AUR for ArchLinux user
 ```bash
 yay -S tada-runner-generator
 ```
 
-Using Brew for macOS user
+##### Using Brew for macOS user
 ```bash
 brew tap ayatmaulana/pkg
 brew install tada-runner-generator
 ```
 
-From Golang Source
+#### From Golang Source
 
 ```bash
 go get -u https://github.com/ayatmaulana/tada-runner-generator
 ```
+
+#### From VSCode Extension
+[TADA Runner Generator on Market Place](https://marketplace.visualstudio.com/items?itemName=ayatmaulana.tada-runner-generator&ssr=false#overview)
+
 
 ## 👀 Usage
 ```bash
