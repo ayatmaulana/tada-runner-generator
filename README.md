@@ -1,9 +1,8 @@
-
-<img src="https://images-na.ssl-images-amazon.com/images/I/71xBAstQ3%2BL._AC_SL1500_.jpg" style="width:50%" align="right" />
-
 # TADA RUNNER GENERATOR
 
 Generator for TADA Runner, simplify you life and avoiding `copas` from existing runner.
+
+<img src="https://i1.sndcdn.com/artworks-000649562410-2ni8um-t500x500.jpg"  align="right" />
 
 ## 🚀 Installation
 
