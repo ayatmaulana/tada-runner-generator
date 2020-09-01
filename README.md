@@ -1,4 +1,4 @@
-<img src="https://images-na.ssl-images-amazon.com/images/I/71xBAstQ3%2BL._AC_SL1500_.jpg" align="right" width="450" />
+<img src="https://images-na.ssl-images-amazon.com/images/I/71xBAstQ3%2BL._AC_SL1500_.jpg" align="right" width="450" height="400" />
 
 # TADA RUNNER GENERATOR
 
