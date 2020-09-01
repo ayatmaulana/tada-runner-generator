@@ -1,9 +1,0 @@
-generate worker
-- single
-- bulk
-- query
-
-
-TopicName MergeCard
-folderName merge-card
-titleName Merge Card
