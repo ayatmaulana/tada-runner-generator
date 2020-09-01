@@ -3,3 +3,6 @@ build:
 
 install:
 	go install
+
+dep:
+	go get -v

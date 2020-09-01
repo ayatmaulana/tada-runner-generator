@@ -3,7 +3,7 @@
 
 # TADA RUNNER GENERATOR
 
-Foobar is a Python library for dealing with word pluralization.
+Generator for TADA Runner, simplify you life and avoiding `copas` from existing runner.
 
 ## 🚀 Installation
 
@@ -19,10 +19,6 @@ brew install tada-runner-generator
 ```
 
 From Golang Source
-
-**Requirements**
-- Golang 1.11 or above
-
 
 ```bash
 go get -u https://github.com/ayatmaulana/tada-runner-generator
@@ -60,13 +56,30 @@ tada-runner-generator add "birthday-notification" -i -c
 tada-runner-generator interactive
 ```
 
-### VS Code Extension
+<!-- ### VS Code Extension -->
 
 
 ## 👨🏻‍💻Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
+
+--
+
+
+
+**Requirements**
+- Golang 1.11 or above
+
+
+**Development Tutorial.**
+
+```bash
+git clone http://github.com/ayatmaulana/tada-runner-generator
+cd tada-runner-generator
+make dep
+make build
+```
 
 ## ❤️ License
 - MIT - [https://choosealicense.com/licenses/mit](https://choosealicense.com/licenses/mit/)
