@@ -66,7 +66,7 @@ tada-runner-generator interactive
 
 
 ### VSCode
-<img src="https://raw.githubusercontent.com/ayatmaulana/tada-runner-generator/master/img/vscode.gif" />
+<img src="https://raw.githubusercontent.com/ayatmaulana/tada-runner-generator/develop/img/vscode.gif" />
 
 ## 👨🏻‍💻Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
