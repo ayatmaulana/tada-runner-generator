@@ -56,6 +56,8 @@ tada-runner-generator add "birthday-notification" -i -c
 tada-runner-generator interactive
 ```
 
+<img src="https://raw.githubusercontent.com/ayatmaulana/tada-runner-generator/master/img/interactive.gif" />
+
 <!-- ### VS Code Extension -->
 
 
